@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LanguagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,16 @@ use App\Http\Controllers\Admin\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware'=>'auth:admin'],function(){
 
-Route::get('/', 'App\Http\Controllers\Admin\DashboardController@index')->name('admin.dashboard');
+define('PAGINATION_COUNT',10);
+Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware'=>'auth:admin'],function(){
+
+Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+
+Route::group(['prefix'=>'languages'], function(){
+
+    Route::get('/','LanguagesController@index')->name('admin.languages');
+});
 
 });
 
