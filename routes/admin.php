@@ -23,8 +23,11 @@ Route::get('/', 'DashboardController@index')->name('admin.dashboard');
 
 Route::group(['prefix'=>'languages'], function(){
 
-    Route::get('/','LanguagesController@index')->name('admin.languages');
-});
+    Route::get('/','LanguagesController@index') -> name('admin.languages');
+        Route::get('create','LanguagesController@create') -> name('admin.languages.create');
+        Route::post('store','LanguagesController@store') -> name('admin.languages.store');
+        
+    });
 
 });
 

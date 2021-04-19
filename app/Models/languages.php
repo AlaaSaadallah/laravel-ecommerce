@@ -23,4 +23,8 @@ class languages extends Model
     public function scopeSelection($query){
         return $query -> select('abbr','name','direction','active');
     }
+
+    public function getActive(){
+        return   $this -> active == 1 ? 'مفعل'  : 'غير مفعل';
+      }
 }
