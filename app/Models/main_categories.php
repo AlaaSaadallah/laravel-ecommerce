@@ -17,6 +17,12 @@ class main_categories extends Model
     
 
      public function scopeActive($query){
+         $this -> active == 1 ? 'مفعل' : 'غير مفعل' ;
          return $query -> where ('active',1);
+     }
+
+
+     public function scopeSelection($query){
+         return $query -> select('id','translation_lang','name','slug','image','active');
      }
 }

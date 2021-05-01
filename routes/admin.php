@@ -24,17 +24,31 @@ Route::get('/', 'DashboardController@index')->name('admin.dashboard');
 Route::group(['prefix'=>'languages'], function(){
 
     Route::get('/','LanguagesController@index') -> name('admin.languages');
-        Route::get('create','LanguagesController@create') -> name('admin.languages.create');
-        Route::post('store','LanguagesController@store') -> name('admin.languages.store');
+    Route::get('create','LanguagesController@create') -> name('admin.languages.create');
+    Route::post('store','LanguagesController@store') -> name('admin.languages.store');
+    Route::get('edit/{id}','LanguagesController@edit') -> name('admin.languages.edit');
+    Route::post('update/{id}','LanguagesController@update') -> name('admin.languages.update');
+        
+    });
+
+
+Route::group(['prefix'=>'main_categories'], function(){
+
+    Route::get('/','MainCategoriesController@index') -> name('admin.mainCategories');
+    Route::get('create','MainCategoriesController@create') -> name('admin.mainCategories.create');
+    Route::post('store','MainCategoriesController@store') -> name('admin.mainCategories.store');
+    Route::get('edit/{id}','MainCategoriesController@edit') -> name('admin.mainCategories.edit');
+    Route::post('update/{id}','MainCategoriesController@update') -> name('admin.mainCategories.update');
         
     });
 
 });
 
 
-Route::group(['middleware'=>'guest:admin'],function(){
+Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware'=>'guest:admin'],function(){
 
-    Route::get('login', 'App\Http\Controllers\Admin\LoginController@getLogin')->name('get.admin.login');
-    Route::post('login', 'App\Http\Controllers\Admin\LoginController@login')->name('admin.login');
+    Route::get('login', 'LoginController@getLogin')->name('get.admin.login');
+    Route::post('login', 'LoginController@login')->name('admin.login');
 });
+
 
